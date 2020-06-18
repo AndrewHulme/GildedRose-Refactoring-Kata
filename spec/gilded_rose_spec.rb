@@ -109,6 +109,15 @@ describe GildedRose do
         expect(items[0].sell_in).to eq 20
         expect(items[0].quality).to eq 80
       end
+
+      it "Past sell in date" do
+        items = [Item.new("Sulfuras, Hand of Ragnaros", -1, 80)]
+        GildedRose.new(items).update_quality()
+
+        expect(items[0].name).to eq "Sulfuras, Hand of Ragnaros"
+        expect(items[0].sell_in).to eq -1
+        expect(items[0].quality).to eq 80
+      end
     end
 
 

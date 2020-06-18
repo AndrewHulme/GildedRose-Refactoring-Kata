@@ -194,6 +194,15 @@ describe GildedRose do
         expect(items[0].quality).to eq 50
       end
 
+      it "At highest quality and less than 5 days to sell in" do
+        items = [Item.new("Backstage passes to a TAFKAL80ETC concert", 5, 50)]
+        GildedRose.new(items).update_quality()
+
+        expect(items[0].name).to eq "Backstage passes to a TAFKAL80ETC concert"
+        expect(items[0].sell_in).to eq 4
+        expect(items[0].quality).to eq 50
+      end
+
     end
 
   end

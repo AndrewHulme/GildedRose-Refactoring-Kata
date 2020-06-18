@@ -89,6 +89,15 @@ describe GildedRose do
         expect(items[0].quality).to eq 50
       end
 
+      it "At highest quality and past sell in date" do
+        items = [Item.new("Aged Brie", -1, 50)]
+        GildedRose.new(items).update_quality()
+
+        expect(items[0].name).to eq "Aged Brie"
+        expect(items[0].sell_in).to eq -2
+        expect(items[0].quality).to eq 50
+      end
+
 
     end
   end

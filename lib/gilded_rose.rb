@@ -21,11 +21,10 @@ class GildedRose
 
     @items.each do |item|
 
-      # this if handles the quality
       if item.name != "Aged Brie" and item.name != "Backstage passes to a TAFKAL80ETC concert" and item.name != "Sulfuras, Hand of Ragnaros" and item.quality > 0
         item.sell_in <= 0 ? item.quality = item.quality - 2 : item.quality = item.quality - 1
 
-      elsif item.sell_in <= 0 and item.name == "Backstage passes to a TAFKAL80ETC concert"
+      elsif item.name == "Backstage passes to a TAFKAL80ETC concert" and item.sell_in <= 0
         item.quality = 0
 
       elsif item.name == "Backstage passes to a TAFKAL80ETC concert" and item.sell_in < 6 and item.quality < 50
@@ -34,7 +33,6 @@ class GildedRose
       elsif item.name == "Backstage passes to a TAFKAL80ETC concert" and item.sell_in < 11 and item.quality < 50
         item.quality = item.quality + 2
 
-      # for (item.name == "Aged Brie" or item.name == "Backstage passes to a TAFKAL80ETC concert")
       elsif item.quality < 50 and item.quality > 0
         item.sell_in <= 0 ? item.quality = item.quality + 2 : item.quality = item.quality + 1
       end

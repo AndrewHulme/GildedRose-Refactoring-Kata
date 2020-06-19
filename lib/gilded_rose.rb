@@ -5,13 +5,15 @@ class GildedRose
   end
 
   def catch_quality_outliers(item)
-
     if item.quality > 50 and item.quality < 80
       item.quality = 50
     elsif item.quality < 0
       item.quality = 0
     end
+  end
 
+  def update_sell_in(item)
+    item.sell_in = item.sell_in - 1 if item.name != "Sulfuras, Hand of Ragnaros"
   end
 
 
@@ -39,10 +41,7 @@ class GildedRose
 
       catch_quality_outliers(item)
 
-      # this if handles the sell in
-      if item.name != "Sulfuras, Hand of Ragnaros"
-        item.sell_in = item.sell_in - 1
-      end
+      update_sell_in(item)
 
     end
   end

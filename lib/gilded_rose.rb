@@ -38,6 +38,13 @@ class GildedRose
 
 
 
+      if item.quality > 50 and item.quality < 80
+        item.quality = 50
+      elsif item.quality < 0
+        item.quality = 0
+      end
+
+
       # this if handles the sell in
       if item.name != "Sulfuras, Hand of Ragnaros"
         item.sell_in = item.sell_in - 1

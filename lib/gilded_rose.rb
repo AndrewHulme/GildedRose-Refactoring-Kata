@@ -10,7 +10,7 @@ class GildedRose
 
       # this if handles the quality
       if item.name != "Aged Brie" and item.name != "Backstage passes to a TAFKAL80ETC concert" and item.name != "Sulfuras, Hand of Ragnaros" and item.quality > 0
-        item.quality = item.quality - 1
+        item.sell_in <= 0 ? item.quality = item.quality - 2 : item.quality = item.quality - 1
 
       elsif item.name == "Backstage passes to a TAFKAL80ETC concert" and item.sell_in < 6 and item.quality < 50
           item.quality = item.quality + 3
@@ -25,25 +25,22 @@ class GildedRose
 
 
       # this if amends the quality if the sell in has passed
-      if item.sell_in <= 0 and item.name != "Aged Brie" and item.name != "Backstage passes to a TAFKAL80ETC concert" and item.name != "Sulfuras, Hand of Ragnaros" and item.quality > 0
-        item.quality = item.quality - 1
 
-      elsif item.sell_in <= 0 and item.name == "Backstage passes to a TAFKAL80ETC concert" and item.quality > 0
+      if item.sell_in <= 0 and item.name == "Backstage passes to a TAFKAL80ETC concert"
         item.quality = 0
 
-      elsif item.sell_in <= 0 and item.quality < 50 and item.quality > 0
+      elsif item.sell_in <= 0 and item.quality < 50 and item.quality > 0 and (item.name == "Aged Brie" or item.name == "Backstage passes to a TAFKAL80ETC concert")
         item.quality = item.quality + 1
 
       end
 
 
-
+      # Catches outliers in quality - refactor to its own method
       if item.quality > 50 and item.quality < 80
         item.quality = 50
       elsif item.quality < 0
         item.quality = 0
       end
-
 
       # this if handles the sell in
       if item.name != "Sulfuras, Hand of Ragnaros"

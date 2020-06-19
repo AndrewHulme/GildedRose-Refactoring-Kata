@@ -233,6 +233,17 @@ describe GildedRose do
 
     end
 
+    describe "Conjured" do
+      it "Normal conditions" do
+        items = [Item.new("Conjured Mana Cake", 20, 20)]
+        GildedRose.new(items).update_quality()
+
+        expect(items[0].name).to eq "Conjured Mana Cake"
+        expect(items[0].sell_in).to eq 19
+        expect(items[0].quality).to eq 18
+      end
+    end
+
   end
 
 end

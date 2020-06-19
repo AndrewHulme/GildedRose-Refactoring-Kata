@@ -4,6 +4,17 @@ class GildedRose
     @items = items
   end
 
+  def catch_quality_outliers(item)
+
+    if item.quality > 50 and item.quality < 80
+      item.quality = 50
+    elsif item.quality < 0
+      item.quality = 0
+    end
+
+  end
+
+
   def update_quality()
 
     @items.each do |item|
@@ -26,12 +37,7 @@ class GildedRose
         item.sell_in <= 0 ? item.quality = item.quality + 2 : item.quality = item.quality + 1
       end
 
-      # Catches outliers in quality - refactor to its own method
-      if item.quality > 50 and item.quality < 80
-        item.quality = 50
-      elsif item.quality < 0
-        item.quality = 0
-      end
+      catch_quality_outliers(item)
 
       # this if handles the sell in
       if item.name != "Sulfuras, Hand of Ragnaros"

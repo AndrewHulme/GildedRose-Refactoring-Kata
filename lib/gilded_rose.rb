@@ -12,14 +12,14 @@ class GildedRose
       if item.name != "Aged Brie" and item.name != "Backstage passes to a TAFKAL80ETC concert" and item.name != "Sulfuras, Hand of Ragnaros" and item.quality > 0
         item.quality = item.quality - 1
 
+      elsif item.name == "Backstage passes to a TAFKAL80ETC concert" and item.sell_in < 6 and item.quality < 50
+          item.quality = item.quality + 3
+
+      elsif item.name == "Backstage passes to a TAFKAL80ETC concert" and item.sell_in < 11 and item.quality < 50
+          item.quality = item.quality + 2
+
       elsif item.quality < 50 and item.quality > 0
         item.quality = item.quality + 1
-
-        if item.name == "Backstage passes to a TAFKAL80ETC concert" and item.sell_in < 6 and item.quality < 50
-          item.quality = item.quality + 2
-        elsif item.name == "Backstage passes to a TAFKAL80ETC concert" and item.sell_in < 11 and item.quality < 50
-          item.quality = item.quality + 1
-        end
 
       end
 

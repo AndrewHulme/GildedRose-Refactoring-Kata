@@ -9,9 +9,10 @@ class GildedRose
     @items.each do |item|
 
       # this if handles the quality
-      if item.name != "Aged Brie" and item.name != "Backstage passes to a TAFKAL80ETC concert" and item.name != "Sulfuras, Hand of Ragnaros"
-        item.quality = item.quality - 1 if item.quality > 0
-      elsif item.quality < 50
+      if item.name != "Aged Brie" and item.name != "Backstage passes to a TAFKAL80ETC concert" and item.name != "Sulfuras, Hand of Ragnaros" and item.quality > 0
+        item.quality = item.quality - 1
+
+      elsif item.quality < 50 and item.quality > 0
         item.quality = item.quality + 1
 
         if item.name == "Backstage passes to a TAFKAL80ETC concert" and item.sell_in < 6 and item.quality < 50
@@ -23,25 +24,23 @@ class GildedRose
       end
 
 
-      # this if handles the sell in
-      if item.name != "Sulfuras, Hand of Ragnaros"
-        item.sell_in = item.sell_in - 1
+      # this if amends the quality if the sell in has passed
+      if item.sell_in <= 0 and item.name != "Aged Brie" and item.name != "Backstage passes to a TAFKAL80ETC concert" and item.name != "Sulfuras, Hand of Ragnaros" and item.quality > 0
+        item.quality = item.quality - 1
+
+      elsif item.sell_in <= 0 and item.name == "Backstage passes to a TAFKAL80ETC concert" and item.quality > 0
+        item.quality = 0
+
+      elsif item.sell_in <= 0 and item.quality < 50 and item.quality > 0
+        item.quality = item.quality + 1
+
       end
 
 
-      # this if amends the quality if the sell in has passed
-      if item.sell_in < 0 and item.name != "Aged Brie" and item.name != "Backstage passes to a TAFKAL80ETC concert" and item.name != "Sulfuras, Hand of Ragnaros"
 
-        item.quality = item.quality - 1 if item.quality > 0
-
-      elsif item.sell_in < 0 and item.name == "Backstage passes to a TAFKAL80ETC concert"
-
-        item.quality = 0
-
-      elsif item.sell_in < 0 and item.quality < 50
-
-        item.quality = item.quality + 1
-
+      # this if handles the sell in
+      if item.name != "Sulfuras, Hand of Ragnaros"
+        item.sell_in = item.sell_in - 1
       end
 
     end

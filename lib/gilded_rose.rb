@@ -22,35 +22,39 @@ class GildedRose
 
       end
 
+
       # this if handles the sell in
       if item.name != "Sulfuras, Hand of Ragnaros"
         item.sell_in = item.sell_in - 1
       end
 
       # this if amends the quality if the sell in has passed
-      if item.sell_in < 0
-        if item.name != "Aged Brie"
+      if item.sell_in < 0 and item.name != "Aged Brie"
+
           if item.name != "Backstage passes to a TAFKAL80ETC concert"
+
             if item.quality > 0 and item.name != "Sulfuras, Hand of Ragnaros"
-
               item.quality = item.quality - 1
-
             end
-          else
+
+          elsif item.name == "Backstage passes to a TAFKAL80ETC concert"
             item.quality = item.quality - item.quality
           end
 
-        else
-          if item.quality < 50
-            item.quality = item.quality + 1
-          end
-        end
+      elsif item.sell_in < 0 and item.quality < 50
+
+        item.quality = item.quality + 1
+
+
       end
 
 
     end
   end
 end
+
+
+
 
 class Item
   attr_accessor :name, :sell_in, :quality

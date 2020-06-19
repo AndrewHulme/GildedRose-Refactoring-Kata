@@ -11,7 +11,7 @@ class GildedRose
     elsif item.quality < 0
       item.quality = 0
     end
-    
+
   end
 
   def update_sell_in(item)

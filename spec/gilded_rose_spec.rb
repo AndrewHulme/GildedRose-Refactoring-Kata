@@ -261,6 +261,15 @@ describe GildedRose do
         expect(items[0].quality).to eq 0
       end
 
+      it "At lowest quality and past sell in date" do
+        items = [Item.new("Conjured Mana Cake", -1, 0)]
+        GildedRose.new(items).update_quality()
+
+        expect(items[0].name).to eq "Conjured Mana Cake"
+        expect(items[0].sell_in).to eq -2
+        expect(items[0].quality).to eq 0
+      end
+
     end
 
   end

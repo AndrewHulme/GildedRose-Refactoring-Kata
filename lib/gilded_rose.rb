@@ -13,15 +13,7 @@ class GildedRose
         item.sell_in <= 0 ? item.quality -= 4 : item.quality -= 2
 
       elsif item_type_backstage_pass(item)
-        if item.sell_in <= 0
-          item.quality = 0
-        elsif item.sell_in < 6
-          item.quality += 3
-        elsif item.sell_in < 11
-          item.quality += 2
-        else
-          item.quality += 1
-        end
+        update_backstage_pass_quality(item)
 
       elsif item_type_aged_brie(item) and item.quality > 0
         item.sell_in <= 0 ? item.quality += 2 : item.quality += 1
@@ -36,6 +28,13 @@ class GildedRose
 
 
   private
+
+  def update_backstage_pass_quality(item)
+    item.quality += 1
+    item.quality += 1 if item.sell_in < 11
+    item.quality += 1 if item.sell_in < 6
+    item.quality = 0 if item.sell_in <= 0
+  end
 
   def catch_quality_outliers(item)
     if item.quality > 50 and item.quality < 80

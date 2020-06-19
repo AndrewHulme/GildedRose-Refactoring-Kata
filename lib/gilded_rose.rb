@@ -2,26 +2,28 @@ class GildedRose
 
   def initialize(items)
     @items = items
-    @agedbrie = "Aged Brie"
-    @backstagepass = "Backstage passes to a TAFKAL80ETC concert"
-    @sulfuras = "Sulfuras, Hand of Ragnaros"
-    @conjured = "Conjured Mana Cake"
   end
 
   def update_quality()
 
     @items.each do |item|
-      if item_normal(item) and item.quality > 0
+      if item_type_normal(item) and item.quality > 0
         item.sell_in <= 0 ? item.quality -= 2 : item.quality -= 1
-      elsif item_conjured(item)
+      elsif item_type_conjured(item)
         item.sell_in <= 0 ? item.quality -= 4 : item.quality -= 2
-      elsif item_backstage_pass(item) and item.sell_in <= 0
-        item.quality = 0
-      elsif item_backstage_pass(item) and item.sell_in < 6
-        item.quality += 3
-      elsif item_backstage_pass(item) and item.sell_in < 11
-        item.quality += 2
-      elsif item.name != @sulfuras and item.quality > 0
+
+      elsif item_type_backstage_pass(item)
+        if item.sell_in <= 0
+          item.quality = 0
+        elsif item.sell_in < 6
+          item.quality += 3
+        elsif item.sell_in < 11
+          item.quality += 2
+        else
+          item.quality += 1
+        end
+
+      elsif item_type_aged_brie(item) and item.quality > 0
         item.sell_in <= 0 ? item.quality += 2 : item.quality += 1
       end
 
@@ -44,23 +46,30 @@ class GildedRose
   end
 
   def update_sell_in(item)
-    item.sell_in -= 1 if item.name != @sulfuras
+    item.sell_in -= 1 if !item_type_sulfuras(item)
   end
 
-  def item_normal(item)
-    item.name != @agedbrie and item.name != @backstagepass and item.name != @sulfuras and item.name != @conjured
+  def item_type_normal(item)
+    !item_type_aged_brie(item) and !item_type_backstage_pass(item) and !item_type_sulfuras(item) and !item_type_conjured(item)
   end
 
-  def item_conjured(item)
-    item.name == @conjured
+  def item_type_conjured(item)
+    item.name == "Conjured Mana Cake"
   end
 
-  def item_backstage_pass(item)
-    item.name == @backstagepass
+  def item_type_backstage_pass(item)
+    item.name == "Backstage passes to a TAFKAL80ETC concert"
+  end
+
+  def item_type_aged_brie(item)
+    item.name == "Aged Brie"
+  end
+
+  def item_type_sulfuras(item)
+    item.name == "Sulfuras, Hand of Ragnaros"
   end
 
 end
-
 
 
 class Item

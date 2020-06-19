@@ -13,7 +13,7 @@ class GildedRose
   end
 
   def update_sell_in(item)
-    item.sell_in = item.sell_in - 1 if item.name != "Sulfuras, Hand of Ragnaros"
+    item.sell_in -= 1 if item.name != "Sulfuras, Hand of Ragnaros"
   end
 
 
@@ -22,22 +22,22 @@ class GildedRose
     @items.each do |item|
 
       if item.name != "Aged Brie" and item.name != "Backstage passes to a TAFKAL80ETC concert" and item.name != "Sulfuras, Hand of Ragnaros" and item.name != "Conjured Mana Cake" and item.quality > 0
-        item.sell_in <= 0 ? item.quality = item.quality - 2 : item.quality = item.quality - 1
+        item.sell_in <= 0 ? item.quality -= 2 : item.quality -= 1
 
       elsif item.name == "Conjured Mana Cake"
-        item.quality = item.quality - 2
+        item.quality -= 2
 
       elsif item.name == "Backstage passes to a TAFKAL80ETC concert" and item.sell_in <= 0
         item.quality = 0
 
       elsif item.name == "Backstage passes to a TAFKAL80ETC concert" and item.sell_in < 6 and item.quality < 50
-        item.quality = item.quality + 3
+        item.quality += 3
 
       elsif item.name == "Backstage passes to a TAFKAL80ETC concert" and item.sell_in < 11 and item.quality < 50
-        item.quality = item.quality + 2
+        item.quality += 2
 
       elsif item.quality < 50 and item.quality > 0
-        item.sell_in <= 0 ? item.quality = item.quality + 2 : item.quality = item.quality + 1
+        item.sell_in <= 0 ? item.quality += 2 : item.quality += 1
       end
 
       catch_quality_outliers(item)

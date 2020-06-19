@@ -24,6 +24,9 @@ class GildedRose
       if item.name != "Aged Brie" and item.name != "Backstage passes to a TAFKAL80ETC concert" and item.name != "Sulfuras, Hand of Ragnaros" and item.name != "Conjured Mana Cake" and item.quality > 0
         item.sell_in <= 0 ? item.quality -= 2 : item.quality -= 1
 
+      elsif item.name == "Conjured Mana Cake" and item.sell_in <= 0
+        item.quality -= 4
+
       elsif item.name == "Conjured Mana Cake"
         item.quality -= 2
 

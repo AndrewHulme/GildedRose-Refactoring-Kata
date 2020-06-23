@@ -7,33 +7,34 @@ class GildedRose
   def update_quality()
 
     @items.each do |item|
-      if item_type_normal(item) and item.quality > 0
-        item.sell_in <= 0 ? item.quality -= 2 : item.quality -= 1
-      elsif item_type_conjured(item)
-        item.sell_in <= 0 ? item.quality -= 4 : item.quality -= 2
-
-      elsif item_type_backstage_pass(item)
-        update_backstage_pass_quality(item)
-
-      elsif item_type_aged_brie(item) and item.quality > 0
-        item.sell_in <= 0 ? item.quality += 2 : item.quality += 1
-      end
-
+      update_normal_quality(item) if (item_type_normal(item) and item.quality > 0)
+      update_aged_brie_quality(item) if (item_type_aged_brie(item) and item.quality > 0)
+      update_conjured_quality(item) if item_type_conjured(item)
+      update_backstage_pass_quality(item) if item_type_backstage_pass(item)
       catch_quality_outliers(item)
-
       update_sell_in(item)
     end
-
   end
 
-
   private
+
+  def update_normal_quality(item)
+    item.sell_in <= 0 ? item.quality -= 2 : item.quality -= 1
+  end
+
+  def update_aged_brie_quality(item)
+    item.sell_in <= 0 ? item.quality += 2 : item.quality += 1
+  end
 
   def update_backstage_pass_quality(item)
     item.quality += 1
     item.quality += 1 if item.sell_in < 11
     item.quality += 1 if item.sell_in < 6
     item.quality = 0 if item.sell_in <= 0
+  end
+
+  def update_conjured_quality(item)
+    item.sell_in <= 0 ? item.quality -= 4 : item.quality -= 2
   end
 
   def catch_quality_outliers(item)

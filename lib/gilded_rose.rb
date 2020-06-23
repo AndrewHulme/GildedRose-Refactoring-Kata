@@ -5,7 +5,6 @@ class GildedRose
   end
 
   def update_quality()
-
     @items.each do |item|
       update_normal_quality(item) if (item_type_normal(item) and item.quality > 0)
       update_aged_brie_quality(item) if (item_type_aged_brie(item) and item.quality > 0)

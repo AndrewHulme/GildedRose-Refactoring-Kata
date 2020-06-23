@@ -1,41 +1,48 @@
 # Gilded Rose Refactoring Kata
 
 ## Project description
-Gilded Rose is a small inn with a prime location in a prominent city run by a friendly innkeeper named Allison.
-
-Buy and sell the finest goods.
-
-Goods degrade in quality over time and have a sell by date.
-- All items have a SellIn value which denotes the number of days we have to sell the items
-- All items have a Quality value which denotes how valuable the item is
-
-Already a system/code in place to adjust quality and sell by date. For most items the system lowers both values for each item at the end of every day.
-
-Exceptions to this rule:
-- Once the sell by date has passed, Quality degrades twice as fast
-- Quality of an item is never negative (0 is the minimum)
-- "Aged Brie" actually increases in Quality the older it gets
-- Quality of an item is never more than 50
-- "Sulfuras", being a legendary item, has no SellIn date and doesn't decrease in Quality
-- “Backstage passes”, like aged brie, increases in Quality as it’s SellIn value approaches; Quality increases by 2 when there are 10 days or less and by 3 when there are 5 days or less but Quality drops to 0 after the concert
-
-New items to the inventory are conjured items:
-- "Conjured" items degrade in Quality twice as fast as normal items
-
-Other things to note
-- Can change UpdateQuality method
-- Can add any new code (so long as everything still works correctly)
-- DO NOT alter the item class or items property
-- Can make UpdateQuality and items property class methods/static if you want
-- Just for clarification, an item can never have its Quality increase above 50, however "Sulfuras" is a
-legendary item and as such its Quality is 80 and it never alters.
+For the project description and requirements please see the original repo below:\
+https://github.com/emilybache/GildedRose-Refactoring-Kata
 
 
 
+## Approach
+After analysing the existing code and requirements I realised there were five types of items:
+1. Normal items
+2. Aged brie
+3. Sulfuras
+4. Backstage passes
+5. Conjured items
 
-## Plan
-1. Add automated tests for the existing code (using the requirements)
+I then completed the challenge in the following four steps:
 
-2. Refactor the existing code
+1. Create an input/output table using the requirements (see section below)
+2. Add automated tests for the existing code using the input output table
+3. Refactor the existing code
+4. Add the new feature
 
-3. Add the new feature
+
+## Technology used
+- Language: Ruby
+- Testing Framework: Rspec
+
+## How to run the project:
+1. Clone this repository from Github then open in your browser
+2. Run 'bundle install' in your terminal after changing into the project folder
+3. Run 'ruby lib/texttest_fixture.rb'
+
+An example of code running can be seen below:
+
+![REPLUsage](images/gilded_rose_running.png)
+
+
+
+## How to run tests:
+1. Clone this repository from Github
+2. Run 'bundle install' in your terminal after changing into the project folder
+3. Run 'rspec'
+
+## Input/Output Table
+
+Input/output table can be seen here:\
+https://docs.google.com/spreadsheets/d/1pty1dYV5UBDFsP6HnH_znX9zZx-7bqUZG3ysXtk484E/edit?usp=sharing

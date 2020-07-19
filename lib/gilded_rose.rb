@@ -6,10 +6,10 @@ class GildedRose
 
   def update_quality()
     @items.each do |item|
-      update_normal_quality(item) if (item_type_normal(item) and item.quality > 0)
-      update_aged_brie_quality(item) if (item_type_aged_brie(item) and item.quality > 0)
-      update_conjured_quality(item) if item_type_conjured(item)
-      update_backstage_pass_quality(item) if item_type_backstage_pass(item)
+      update_normal_quality(item) if (item_type_normal?(item) and item.quality > 0)
+      update_aged_brie_quality(item) if (item_type_aged_brie?(item) and item.quality > 0)
+      update_conjured_quality(item) if item_type_conjured?(item)
+      update_backstage_pass_quality(item) if item_type_backstage_pass?(item)
       catch_quality_outliers(item)
       update_sell_in(item)
     end
@@ -45,26 +45,26 @@ class GildedRose
   end
 
   def update_sell_in(item)
-    item.sell_in -= 1 if !item_type_sulfuras(item)
+    item.sell_in -= 1 if !item_type_sulfuras?(item)
   end
 
-  def item_type_normal(item)
-    !item_type_aged_brie(item) and !item_type_backstage_pass(item) and !item_type_sulfuras(item) and !item_type_conjured(item)
+  def item_type_normal?(item)
+    !item_type_aged_brie?(item) and !item_type_backstage_pass?(item) and !item_type_sulfuras?(item) and !item_type_conjured?(item)
   end
 
-  def item_type_conjured(item)
+  def item_type_conjured?(item)
     item.name == "Conjured Mana Cake"
   end
 
-  def item_type_backstage_pass(item)
+  def item_type_backstage_pass?(item)
     item.name == "Backstage passes to a TAFKAL80ETC concert"
   end
 
-  def item_type_aged_brie(item)
+  def item_type_aged_brie?(item)
     item.name == "Aged Brie"
   end
 
-  def item_type_sulfuras(item)
+  def item_type_sulfuras?(item)
     item.name == "Sulfuras, Hand of Ragnaros"
   end
 

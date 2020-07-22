@@ -24,7 +24,7 @@ I then completed the challenge in the following four steps:
 
 ## Technology used
 - Language: Ruby
-- Testing Framework: Rspec
+- Testing Framework: RSpec
 
 ## How to run the project:
 1. Clone this repository from Github then open in your browser
